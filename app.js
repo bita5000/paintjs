@@ -4,9 +4,15 @@ const lineWidth = document.getElementById("line-width");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const modeBtn = document.getElementById("mode-btn");
+const destroyBtn = document.getElementById("destroy-btn");
+const eraseBtn = document.getElementById("eraser-btn");
 
-canvas.width = 400;
-canvas.height = 400;
+const CANVAS_WIDTH = 400;
+const CANVAS_HEIGHT = 400;
+
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
+
 
 ctx.lineWidth = lineWidth.value;
 
@@ -50,7 +56,7 @@ function onColorClick(e) {
     color.value = colorValue;
 }
 
-// 생상 채우기
+// 색상 채우기
 function onModeClick() {
     if (isFilling === true) {
         isFilling = false;
@@ -63,8 +69,21 @@ function onModeClick() {
 
 function onCanvasClick() {
     if (isFilling === true) {
-        ctx.fillRect(0, 0, 400, 400);
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
+}
+
+// 캔버스 초기화
+function onDestroyClick() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+// 지우개
+function onEraserClick() {
+    ctx.strokeStyle = "white";
+    isFilling = false;
+    modeBtn.innerText = "fill";
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -80,3 +99,7 @@ color.addEventListener("change", onColorChange);
 colorOptions.forEach(color => color.addEventListener("click", onColorClick));
 
 modeBtn.addEventListener("click", onModeClick);
+
+destroyBtn.addEventListener("click", onDestroyClick);
+
+eraseBtn.addEventListener("click", onEraserClick);
