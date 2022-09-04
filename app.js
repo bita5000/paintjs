@@ -1,3 +1,5 @@
+const colorOptions = Array.from(document.getElementsByClassName("color-option"));
+const color = document.getElementById("color");
 const lineWidth = document.getElementById("line-width");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -32,9 +34,27 @@ function onLineWidthChange(e) {
     ctx.lineWidth = e.target.value;
 }
 
+// 색상 선택 감지
+function onColorChange(e) {
+    ctx.strokeStyle = e.target.value;
+    ctx.fillStyle = e.target.value;
+}
+
+// 지정 색상 클릭 감지
+function onColorClick(e) {
+    const colorValue = e.target.dataset.color;
+    ctx.strokeStyle = colorValue;
+    ctx.fillStyle = colorValue;
+    color.value = colorValue;
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
 
 lineWidth.addEventListener("change", onLineWidthChange);
+
+color.addEventListener("change", onColorChange);
+
+colorOptions.forEach(color => color.addEventListener("click", onColorClick));
