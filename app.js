@@ -6,6 +6,7 @@ const ctx = canvas.getContext("2d");
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraseBtn = document.getElementById("eraser-btn");
+const saveBtn = document.getElementById("save-btn");
 
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 400;
@@ -86,6 +87,15 @@ function onEraserClick() {
     modeBtn.innerText = "fill";
 }
 
+// 이미지 저장
+function onSaveClick() {
+    const url = canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "canvas.png";
+    a.click();
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -103,3 +113,5 @@ modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 
 eraseBtn.addEventListener("click", onEraserClick);
+
+saveBtn.addEventListener("click", onSaveClick);

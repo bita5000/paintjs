@@ -11,6 +11,7 @@
 
 <body>
     <canvas></canvas>
+    <!-- javascript보다 html element가 먼저 로드되기때문에 default value를 먼저 설정해 줘야 함 -->
     <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
     <div>
         <input id="color" type="color" />
@@ -30,6 +31,7 @@
     <button id="mode-btn">fill</button>
     <button id="destroy-btn">destroy</button>
     <button id="eraser-btn">erase</button>
+    <button id="save-btn">save</button>
     <script src="app.js"></script>
 </body>
 
